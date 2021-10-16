@@ -1,25 +1,30 @@
 {
-  "name": "theme-solarized-dark",
-  "displayName": "%displayName%",
-  "description": "%description%",
-  "version": "1.0.0",
-  "publisher": "vscode",
-  "license": "MIT",
-  "engines": {
-    "vscode": "*"
-  },
-  "contributes": {
-    "themes": [
-      {
-        "id": "Solarized Dark",
-        "label": "%themeLabel%",
-        "uiTheme": "vs-dark",
-        "path": "./themes/solarized-dark-color-theme.json"
-      }
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/microsoft/vscode.git"
-  }
+	"name": "theme-solarized-dark",
+	"displayName": "%displayName%",
+	"description": "%description%",
+	"version": "1.0.0",
+	"publisher": "vscode",
+	"license": "MIT",
+	"engines": {
+		"vscode": "*"
+	},
+	"contributes": {
+		"themes": [
+			{
+				"id": "Solarized Dark",
+				"label": "%themeLabel%",
+				"uiTheme": "vs-dark",
+				"path": "./themes/solarized-dark-color-theme.json"
+			}
+		]
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/microsoft/vscode.git"
+	},
+	"__metadata": {
+		"id": "bab7ad29-a903-4c4a-9afc-32be409e4639",
+		"publisherDisplayName": null,
+		"publisherId": "9156ae8e-c2fd-4dab-9232-54bbce5b1621"
+	}
 }
