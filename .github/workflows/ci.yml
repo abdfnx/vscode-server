@@ -4,11 +4,13 @@ on:
   push:
     branches:
       - main
-      - release/*
   pull_request:
     branches:
       - main
-      - release/*
+  page_build:
+  release:
+    types:
+      - created
 
 jobs:
   windows:

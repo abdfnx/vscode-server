@@ -8,7 +8,10 @@ on:
       - completed
     branches:
       - main
-      - release/*
+    page_build:
+    release:
+      types:
+        - created
 
 jobs:
   main:
