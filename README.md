@@ -1,4 +1,6 @@
-# OpenVSCode Server
+# VSCode Server
+
+> by **@gitpod-io**
 
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/from-referrer)
 [![GitHub](https://img.shields.io/github/license/gitpod-io/openvscode-server)](https://github.com/gitpod-io/openvscode-server/blob/main/LICENSE.txt)
@@ -7,8 +9,6 @@
 ## What is this?
 
 This project provides a version of VS Code that runs a server on a remote machine and allows access through a modern web browser. It's based on the very same architecture used by [Gitpod](https://www.gitpod.io) or [GitHub Codespaces](https://github.com) at scale.
-
-<img width="1624" alt="Screenshot 2021-09-02 at 08 39 26" src="https://user-images.githubusercontent.com/372735/131794918-d6602646-4d67-435b-88fe-620a3cc0a3aa.png">
 
 ## Why?
 
@@ -24,37 +24,33 @@ At Gitpod, we've been asked a lot about how we do it. So we thought we might as 
 
 - Start the server:
 ```bash
-docker run -it --init -p 3000:3000 -v "$(pwd):/home/workspace:cached" gitpod/openvscode-server
+docker run -it --init -p 3000:3000 -v "$(pwd):/home/workspace:cached" abdcodedoc/vscode-server
 ```
 - Visit [localhost:3000](http://localhost:3000).
-
-_Note_: Feel free to use the `nightly` tag to test the latest version, i.e. `gitpod/openvscode-server:nightly`.
 
 #### Custom Environment
 - If you want to add dependencies to this Docker image, here is a template to help:
 	```Dockerfile
 
-	FROM gitpod/openvscode-server:latest
+	FROM abdcodedoc/vscode-server:latest
 
 	USER root # to get permissions to install packages and such
 	RUN # the installation process for software needed
-	USER openvscode-server # to restore permissions for the web interface
+	USER vscode-server # to restore permissions for the web interface
 
 	```
 - For additional possibilities, please consult the `Dockerfile` for OpenVSCode Server at https://github.com/gitpod-io/openvscode-releases/
 
 ### Linux
 
-- [Download the latest release](https://github.com/gitpod-io/openvscode-server/releases/latest)
+- [Download the latest release](https://github.com/abdfnx/vscode-server/releases/latest)
 - Untar and run the server:
 ```bash
-tar -xzf openvscode-server-v${OPENVSCODE_SERVER_VERSION}.tar.gz
-cd openvscode-server-v${OPENVSCODE_SERVER_VERSION}
+tar -xzf vscode-server-v${VSCODE_SERVER_VERSION}.tar.gz
+cd vscode-server-v${VSCODE_SERVER_VERSION}
 ./server.sh
 ```
 - Visit [localhost:3000](http://localhost:3000).
-
-_Note_: You can use [pre-releases](https://github.com/gitpod-io/openvscode-server/releases) to test nightly changes.
 
 ### Deployment guides
 
