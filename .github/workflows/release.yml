@@ -92,24 +92,24 @@ jobs:
         working-directory: ./vscode-server
         run: |
           yarn playwright-install
-      - name: Compile test suites
-        working-directory: ./vscode-server
-        run: |
-          set -e
-          yarn --cwd test/smoke compile
-          yarn --cwd test/integration/browser compile
-      - name: Run integration tests
-        working-directory: ./vscode-server
-        run: |
-          set -e
-          VSCODE_REMOTE_SERVER_PATH="$GITHUB_WORKSPACE/server-pkg" \
-          ./resources/server/test/test-web-integration.sh --browser chromium
-      - name: Run smoke tests
-        working-directory: ./vscode-server
-        run: |
-          set -e
-          VSCODE_REMOTE_SERVER_PATH="$GITHUB_WORKSPACE/server-pkg" \
-          yarn smoketest --web --headless --electronArgs="--disable-dev-shm-usage --use-gl=swiftshader"
+      # - name: Compile test suites
+      #   working-directory: ./vscode-server
+      #   run: |
+      #     set -e
+      #     yarn --cwd test/smoke compile
+      #     yarn --cwd test/integration/browser compile
+      # - name: Run integration tests
+      #   working-directory: ./vscode-server
+      #   run: |
+      #     set -e
+      #     VSCODE_REMOTE_SERVER_PATH="$GITHUB_WORKSPACE/server-pkg" \
+      #     ./resources/server/test/test-web-integration.sh --browser chromium
+      # - name: Run smoke tests
+      #   working-directory: ./vscode-server
+      #   run: |
+      #     set -e
+      #     VSCODE_REMOTE_SERVER_PATH="$GITHUB_WORKSPACE/server-pkg" \
+      #     yarn smoketest --web --headless --electronArgs="--disable-dev-shm-usage --use-gl=swiftshader"
 
       - name: Determine archive filename
         uses: haya14busa/action-cond@v1
