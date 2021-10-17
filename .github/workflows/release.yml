@@ -168,48 +168,17 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           path: outputs/
-
       - run: |
-          echo "VERSION=$(ls outputs/Linux-x64 | sed -nre 's/^[^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p')" >> $GITHUB_ENV
+          unzip outputs/Linux-x64.zip
 
       - name: Create stable release
         if: env.QUALITY == 'stable'
         uses: softprops/action-gh-release@v1
         with:
-          repository: scmn-dev/vscode-server
-          target_commitish: ${{ env.RELEASE_COMMIT }}
-          body: OpenVSCode Server v${{ env.VERSION }}
-          tag_name: vscode-server-v${{ env.VERSION }}
           token: ${{ secrets.ACCESS_TOKEN }}
           files: |
-            outputs/**/*.tar.gz
-            outputs/**/*.zip
-      - name: Delete previous nightly release
-        if: env.QUALITY == 'nightly'
-        uses: dev-drprasad/delete-older-releases@v0.2.0
-        with:
-          repo: scmn-dev/vscode-server
-          keep_latest: 0
-          delete_tags: true
-          delete_tag_pattern: vscode-server-nightly
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      - name: Sleep
-        if: env.QUALITY == 'nightly'
-        run: sleep 30s
-      - name: Create nightly release
-        if: env.QUALITY == 'nightly'
-        uses: softprops/action-gh-release@v1
-        with:
-          repository: scmn-dev/vscode-server
-          target_commitish: ${{ env.RELEASE_COMMIT }}
-          body: OpenVSCode Server Nightly v${{ env.VERSION }}
-          tag_name: vscode-server-nightly-v${{ env.VERSION }}
-          prerelease: true
-          token: ${{ secrets.ACCESS_TOKEN }}
-          files: |
-            outputs/**/*.tar.gz
-            outputs/**/*.zip
+            outputs/Linux-x64.zip
+            outputs/${{ github.event.inputs.commit }}-linux-x64.tar.gz
 
   docker:
     needs: upload
@@ -226,8 +195,7 @@ jobs:
 
       - name: Set server version
         run: |
-          echo "RELEASE_TAG=$(ls outputs/Linux-x64 | sed -nre 's/^(.*)-linux-x64.tar.gz/\1/p')" >> $GITHUB_ENV
-          echo "VERSION=$(ls outputs/Linux-x64 | sed -nre 's/^[^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p')" >> $GITHUB_ENV
+          echo "VERSION=$(echo ${{ github.event.inputs.commit }} | sed -nre 's/^[^0-9]*(([0-9]+\.)*[0-9]+).*/\1/p')" >> $GITHUB_ENV
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v3
@@ -247,5 +215,5 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          build-args: RELEASE_TAG=${{ env.RELEASE_TAG }}
+          build-args: RELEASE_TAG=${{ github.event.inputs.commit }}
           tags: ${{ steps.meta.outputs.tags }}
