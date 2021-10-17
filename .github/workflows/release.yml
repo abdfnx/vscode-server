@@ -168,8 +168,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           path: outputs/
-      - run: |
-          unzip outputs/Linux-x64.zip
+      - run: unzip outputs/Linux-x64
 
       - name: Create stable release
         if: env.QUALITY == 'stable'
