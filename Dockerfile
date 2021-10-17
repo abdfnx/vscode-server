@@ -13,7 +13,7 @@ RUN apt update && \
 WORKDIR /home/
 
 # Downloading the latest VSC Server release and extracting the release archive
-RUN wget https://github.com/abdfnx/vscode-server/releases/download/${RELEASE_TAG}/${RELEASE_TAG}-linux-x64.tar.gz && \
+RUN wget https://github.com/scmn-dev/vscode-server/releases/download/${RELEASE_TAG}/${RELEASE_TAG}-linux-x64.tar.gz && \
     tar -xzf ${RELEASE_TAG}-linux-x64.tar.gz && \
     rm -f ${RELEASE_TAG}-linux-x64.tar.gz
 
