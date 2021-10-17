@@ -36,7 +36,7 @@ docker run -it --init -p 3000:3000 -v "$(pwd):/home/workspace:cached" abdcodedoc
 
 	USER root # to get permissions to install packages and such
 	RUN # the installation process for software needed
-	USER vscode-server # to restore permissions for the web interface
+	USER workspace # to restore permissions for the web interface
 
 	```
 - For additional possibilities, please consult the `Dockerfile` for OpenVSCode Server at https://github.com/gitpod-io/openvscode-releases/
