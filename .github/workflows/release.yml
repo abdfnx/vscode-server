@@ -35,7 +35,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          repository: abdfnx/vscode-server
+          repository: scmn-dev/vscode-server
           ref: ${{ env.RELEASE_COMMIT }}
           path: vscode-server
           token: ${{ secrets.ACCESS_TOKEN }}
@@ -176,7 +176,7 @@ jobs:
         if: env.QUALITY == 'stable'
         uses: softprops/action-gh-release@v1
         with:
-          repository: abdfnx/vscode-server
+          repository: scmn-dev/vscode-server
           target_commitish: ${{ env.RELEASE_COMMIT }}
           body: OpenVSCode Server v${{ env.VERSION }}
           tag_name: vscode-server-v${{ env.VERSION }}
@@ -188,7 +188,7 @@ jobs:
         if: env.QUALITY == 'nightly'
         uses: dev-drprasad/delete-older-releases@v0.2.0
         with:
-          repo: abdfnx/vscode-server
+          repo: scmn-dev/vscode-server
           keep_latest: 0
           delete_tags: true
           delete_tag_pattern: vscode-server-nightly
@@ -201,7 +201,7 @@ jobs:
         if: env.QUALITY == 'nightly'
         uses: softprops/action-gh-release@v1
         with:
-          repository: abdfnx/vscode-server
+          repository: scmn-dev/vscode-server
           target_commitish: ${{ env.RELEASE_COMMIT }}
           body: OpenVSCode Server Nightly v${{ env.VERSION }}
           tag_name: vscode-server-nightly-v${{ env.VERSION }}
